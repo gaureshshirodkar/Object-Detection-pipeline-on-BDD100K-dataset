@@ -7,4 +7,3 @@ docker load -i input_data_analysis.tar
 docker run --rm -p 8050:8050 -v "C:\Personal\Bosch_assignment:/data" -e TRAIN_LABELS_PATH=/data/assignment_data_bdd_files/bdd100k_labels_release/bdd100k/labels/bdd100k_labels_images_train.json -e VAL_LABELS_PATH=/data/assignment_data_bdd_files/bdd100k_labels_release/bdd100k/labels/bdd100k_labels_images_val.json input_data_analysis
 
 docker logs <container_id>
-http://localhost:8050/ or http://127.0.0.1:8050/

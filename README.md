@@ -57,6 +57,17 @@ docker run --rm -p 8050:8050 -v "C:\path_to_data:/data" -e TRAIN_LABELS_PATH=/da
 
 
 
+### Visualize the output dashboard
+
+```sh
+# Open browser and copy paste one of the link given below and execute
+
+http://localhost:8050/  
+http://127.0.0.1:8050/
+```
+
+
+
 ### BDD100K input analysis dashboard output
 
 ![input_analysis_video](utils/input_analysis_video.gif)
