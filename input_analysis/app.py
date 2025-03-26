@@ -158,7 +158,9 @@ def main():
 
         return category_fig, weather_fig, timeofday_fig, freq_fig, size_fig, position_fig
 
-    app.run(debug=True, host='0.0.0.0', port=8050)
+    # app.run(debug=True, host='0.0.0.0', port=8050)
+    app.run(debug=True, port=8050)
+    # app.run(debug=True)
 
 if __name__ == '__main__':
     main()

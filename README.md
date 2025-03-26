@@ -68,6 +68,17 @@ http://127.0.0.1:8050/
 
 
 
+### Visualize the output dashboard using python script
+
+```python
+# Run command
+python input_analysis.py
+```
+
+
+
+
+
 ### BDD100K input analysis dashboard output
 
 ![input_analysis_video](utils/input_analysis_video.gif)

@@ -6,7 +6,6 @@ WORKDIR .
 
 # Copy the requirements file and install dependencies
 COPY requirements.txt .
-COPY input_analysis.py .
 COPY app.py .
 RUN pip install --no-cache-dir -r requirements.txt
 
