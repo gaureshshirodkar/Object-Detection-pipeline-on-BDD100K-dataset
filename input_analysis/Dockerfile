@@ -7,6 +7,7 @@ WORKDIR .
 # Copy the requirements file and install dependencies
 COPY requirements.txt .
 COPY input_analysis.py .
+COPY app.py .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code
@@ -16,4 +17,4 @@ COPY . .
 EXPOSE 8050
 
 # Command to run the application
-CMD ["python", "input_analysis.py"]
+CMD ["python", "app.py"]
