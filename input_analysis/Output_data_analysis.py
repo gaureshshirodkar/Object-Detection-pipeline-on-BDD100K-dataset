@@ -2,24 +2,6 @@
 import matplotlib.pyplot as plt
 import torch
 
-# Dictionary with metrics
-# metrics = {
-#     'classes': torch.tensor([0, 1, 2, 3, 4, 5, 6, 7, 9], dtype=torch.int32),
-#     'map': torch.tensor(0.3320),
-#     'map_50': torch.tensor(0.4279),
-#     'map_75': torch.tensor(0.2734),
-#     'map_large': torch.tensor(0.7676),
-#     'map_medium': torch.tensor(0.4417),
-#     'map_per_class': torch.tensor([0.4739, 0.3438, 0.3582, 0.3979, 0.0000, 0.3884, 0.2020, 0.5543, 0.2693]),
-#     'map_small': torch.tensor(0.1247),
-#     'mar_1': torch.tensor(0.1927),
-#     'mar_10': torch.tensor(0.3392),
-#     'mar_100': torch.tensor(0.3509),
-#     'mar_100_per_class': torch.tensor([0.4889, 0.3789, 0.4170, 0.4263, 0.0000, 0.4000, 0.2000, 0.5805, 0.2667]),
-#     'mar_large': torch.tensor(0.7777),
-#     'mar_medium': torch.tensor(0.4699),
-#     'mar_small': torch.tensor(0.1439),
-# }
 
 metrics = {'classes': torch.tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=torch.int32),
  'map': torch.tensor(0.3156),

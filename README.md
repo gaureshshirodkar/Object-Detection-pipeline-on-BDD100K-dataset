@@ -91,11 +91,33 @@ docker run --rm -p 8050:8050 -v "C:\path_to_data:/data" -e TRAIN_LABELS_PATH=/da
 
 ---
 
+This repository used the Yolov8s model for inference because of the high accuracy and low latency
+
+Reference:  https://github.com/ultralytics/ultralytics
+
+Note: 
+
+- Model is tested on the sample video present in the repository (Path: "Object-Detection-pipeline-on-BDD100K-dataset/model_inference/sample_video_1.mp4")
+- Model file is present in the model inference folder
 
 
 
+### Testing the model inference
 
+```sh
 
+# Update the following variable in the infer_yolov8.py file
+VIDEO_PATH = "sample_video_1.mp4"
+
+# For testing the custom model file trained on the BDD100k dataset update the below dictionary
+MODEL_PATHS = {
+    'yolov8s': "best.pt"
+}
+
+# Command to run the inference
+python infer_yolov8.py
+
+```
 
 
 
@@ -105,5 +127,56 @@ docker run --rm -p 8050:8050 -v "C:\path_to_data:/data" -e TRAIN_LABELS_PATH=/da
 
 ## Output Analysis
 
----
+----
 
+
+
+### Testing of output analysis on sample file
+
+```python
+# Update global constant in output_analysis.py to true to use the sample file
+DEBUG = True
+
+# Test output analysis
+python output_analyis.py
+```
+
+
+
+### Testing of output analysis on complete BDD datase
+
+```python
+# Update global constant in output_analysis.py to false to use the sample file
+DEBUG = False
+
+# Update the path of validation image and label file in the output_analysis.py file
+VAL_IMAGE_PATH = "path_to_val_image_folder"
+VAL_LABELS_PATH = "path_to_val_label.json"
+
+# Test output analysis
+python output_analyis.py
+```
+
+
+
+### Results
+
+ Output analysis Mean average precision and Mean average recall is calculated for
+
+- Different iou confidence
+- Different bounding box size
+- For individual classes
+
+![Aggregated_metrics](output_analysis/Aggregated_metrics.png)
+
+
+
+![per_class_metrics](output_analysis/per_class_metrics.png)
+
+### Conclusion
+
+- Since the input data for train was very less the model was not able to predict train class
+- Model is trained to identify larger objects with higher accuracy
+- Suggestion
+  - Model can use augmentation to identify smaller objects 
+  - Better model can be used to detect smaller object. 

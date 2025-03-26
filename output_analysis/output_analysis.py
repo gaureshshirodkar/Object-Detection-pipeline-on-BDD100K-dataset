@@ -1,18 +1,25 @@
+# Standard imports
 import os
 import json
-import cv2
-import numpy as np
-import torch
 import yaml
-import matplotlib.pyplot as plt
+
+# Third party imports
+import cv2
+import torch
+import numpy as np
 from ultralytics import YOLO
+import matplotlib.pyplot as plt
 from torchmetrics.detection import MeanAveragePrecision
+
+# Local imports
 from Testing_output_analysis.object_detection_confusion_matrix.object_detection_confusion_matrix import (
     ObjectDetectionConfusionMatrix,
 )
 
+
+# Global variables
 RELATIVE_PATH = os.getcwd()
-DEBUG = True
+DEBUG = False
 CLASS_LIST_ID = {
     "bus": 0,
     "traffic light": 1,
@@ -25,6 +32,10 @@ CLASS_LIST_ID = {
     "train": 8,
     "rider": 9,
 }
+CLASS_LIST_NAME = {v: k for k, v in CLASS_LIST_ID.items()}
+VAL_IMAGE_PATH = "C:\\Personal\\Bosch_assignment\\assignment_data_bdd_files\\bdd100k_images_100k\\bdd100k\\images\\100k\\val"
+VAL_LABELS_PATH = "C:\\Personal\\Bosch_assignment\\assignment_data_bdd_files\\bdd100k_labels_release\\bdd100k\\labels\\bdd100k_labels_images_val.json"
+
 
 def draw_boxes(image, boxes, classes, color, label):
     """
@@ -124,33 +135,34 @@ def plot_aggregated_metrics(metrics):
     plt.show()
 
 
-# Plot per-class metrics
 def plot_per_class_metrics(classes, map_per_class, mar_100_per_class):
     """
     Plots per-class metrics (mAP and mAR_100) for object detection performance.
 
     Args:
-        classes (List[str]): List of class names.
+        classes (List[int] or List[str]): List of class names or class IDs.
         map_per_class (List[float]): List of mean average precision (mAP) values per class.
         mar_100_per_class (List[float]): List of mean average recall (mAR_100) values per class.
 
     Returns:
         None
     """
+    string_classes = [CLASS_LIST_NAME.get(cls, str(cls)) if isinstance(cls, int) else cls for cls in classes]
+
     plt.figure(figsize=(12, 6))
-    x = range(len(classes))
+    x = range(len(string_classes))
 
     plt.bar(x, map_per_class, width=0.4, label='mAP per class', color='orange')
     plt.bar([i + 0.4 for i in x], mar_100_per_class, width=0.4, label='mAR_100 per class', color='purple')
 
-    plt.xticks([i + 0.2 for i in x], classes, rotation=45)
+    plt.xticks([i + 0.2 for i in x], string_classes, rotation=45)
     plt.xlabel('Classes')
     plt.ylabel('Metric Values')
     plt.title('Per-Class Metrics (mAP and mAR_100)')
     plt.legend()
     plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
     plt.show()
-
 
 def main():
     # Load trained YOLOv8 model
@@ -159,7 +171,7 @@ def main():
 
     ground_truths = (
         load_ground_truth(
-            "C:\\Personal\\Bosch_assignment\\assignment_data_bdd_files\\bdd100k_labels_release\\bdd100k\\labels\\bdd100k_labels_images_val.json"
+            VAL_LABELS_PATH
         )
         if not DEBUG
         else load_ground_truth(
@@ -249,3 +261,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
