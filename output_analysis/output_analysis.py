@@ -1,3 +1,4 @@
+import os
 import json
 import cv2
 import numpy as np
@@ -10,8 +11,8 @@ from Testing_output_analysis.object_detection_confusion_matrix.object_detection_
     ObjectDetectionConfusionMatrix,
 )
 
-
-DEBUG = False
+RELATIVE_PATH = os.getcwd()
+DEBUG = True
 CLASS_LIST_ID = {
     "bus": 0,
     "traffic light": 1,
@@ -162,7 +163,7 @@ def main():
         )
         if not DEBUG
         else load_ground_truth(
-            "C:\\Personal\\Bosch_assignment\\assignment_data_bdd_files\\bdd100k_labels_release\\bdd100k\\test_json_1.json"
+            RELATIVE_PATH + "\\sample_files\\test_json_1.json"
         )
     )
 
@@ -173,7 +174,7 @@ def main():
         )
         if not DEBUG
         else model.predict(
-            "C:\\Personal\\Bosch_assignment\\assignment_data_bdd_files\\bdd100k_images_100k\\bdd100k\\images\\100k\\test_image_1",
+            RELATIVE_PATH + "\\sample_files\\",
             save=False,
         )
     )
