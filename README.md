@@ -10,6 +10,8 @@
 
 ---
 
+---
+
 ## Input data analysis
 
 ---
@@ -87,6 +89,8 @@ docker run --rm -p 8050:8050 -v "C:\path_to_data:/data" -e TRAIN_LABELS_PATH=/da
 
 ---
 
+---
+
 ## Model Inference
 
 ---
@@ -126,6 +130,29 @@ python infer_yolov8.py
 ![model_inference](utils/model_inference.gif)
 
 
+
+
+
+---
+
+---
+
+## Model Training
+
+---
+
+### Command to execute
+
+```python
+# Command
+python train.py
+```
+
+
+
+
+
+----
 
 ---
 
