@@ -2,6 +2,20 @@ import matplotlib.pyplot as plt
 import torch
 
 
+CLASS_LIST_ID = {
+    "bus": 0,
+    "traffic light": 1,
+    "traffic sign": 2,
+    "person": 3,
+    "bike": 4,
+    "truck": 5,
+    "motor": 6,
+    "car": 7,
+    "train": 8,
+    "rider": 9,
+}
+CLASS_LIST_NAME = {v: k for k, v in CLASS_LIST_ID.items()}
+
 metrics = {
     'classes': torch.tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=torch.int32),
     'map': torch.tensor(0.3156),
@@ -44,18 +58,32 @@ def plot_aggregated_metrics(metrics):
 
 # Plot per-class metrics
 def plot_per_class_metrics(classes, map_per_class, mar_100_per_class):
+    """
+    Plots per-class metrics (mAP and mAR_100) for object detection performance.
+
+    Args:
+        classes (List[int] or List[str]): List of class names or class IDs.
+        map_per_class (List[float]): List of mean average precision (mAP) values per class.
+        mar_100_per_class (List[float]): List of mean average recall (mAR_100) values per class.
+
+    Returns:
+        None
+    """
+    string_classes = [CLASS_LIST_NAME.get(cls, str(cls)) if isinstance(cls, int) else cls for cls in classes]
+
     plt.figure(figsize=(12, 6))
-    x = range(len(classes))
+    x = range(len(string_classes))
 
     plt.bar(x, map_per_class, width=0.4, label='mAP per class', color='orange')
     plt.bar([i + 0.4 for i in x], mar_100_per_class, width=0.4, label='mAR_100 per class', color='purple')
 
-    plt.xticks([i + 0.2 for i in x], classes, rotation=45)
+    plt.xticks([i + 0.2 for i in x], string_classes, rotation=45)
     plt.xlabel('Classes')
     plt.ylabel('Metric Values')
     plt.title('Per-Class Metrics (mAP and mAR_100)')
     plt.legend()
     plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
     plt.show()
 
 # Plot metrics
