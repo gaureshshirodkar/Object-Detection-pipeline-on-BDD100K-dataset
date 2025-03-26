@@ -121,6 +121,10 @@ python infer_yolov8.py
 
 
 
+### Output 
+
+![model_inference](utils/model_inference.gif)
+
 
 
 ---
